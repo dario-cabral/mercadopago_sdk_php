@@ -10,7 +10,7 @@ Modified to work with Larabel 8.x
 
 ## 💡 Requirements
 
-PHP 7.3 or higher
+PHP 7.1 or higher
 
 ## 📲 Installation 
 
