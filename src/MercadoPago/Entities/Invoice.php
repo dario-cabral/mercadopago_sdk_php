@@ -1,5 +1,7 @@
 <?php
-namespace MercadoPago;
+namespace MercadoPago\Entities;
+
+use MercadoPago\Entity;
 
 /**
  * Invoice class

@@ -1,5 +1,8 @@
 <?php
-namespace MercadoPago;
+namespace MercadoPago\Entities\Shared;
+
+use MercadoPago\Entity;
+use MercadoPago\Entities\Refund;
 
 /**
  * This class provides the methods to access the API that will allow you to create your own payment experience on your website.

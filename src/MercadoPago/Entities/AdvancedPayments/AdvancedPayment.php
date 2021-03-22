@@ -1,7 +1,8 @@
 <?php
-namespace MercadoPago\AdvancedPayments;
+namespace MercadoPago\Entities\AdvancedPayments;
 
 use MercadoPago\Entity;
+use MercadoPago\Entities\Refund;
 
 /**
  * Advanced Payment class

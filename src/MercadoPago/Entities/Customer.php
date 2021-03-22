@@ -1,5 +1,7 @@
 <?php
-namespace MercadoPago;
+namespace MercadoPago\Entities;
+
+use MercadoPago\Entity;
 
 /**
  * This class allows you to store customers data safely to improve the shopping experience.

@@ -1,12 +1,11 @@
 <?php
- 
-namespace MercadoPago;
+namespace MercadoPago\Generic;
 
-class ErrorCause {
-
+/**
+ * @package MercadoPago\Generic
+ */
+class ErrorCause
+{
     public $code = ""; 
     public $description = "";
-
 }
-
-?>

@@ -1,5 +1,6 @@
 <?php
 namespace MercadoPago\Http;
+
 /**
  * Interface HttpRequest
  *

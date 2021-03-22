@@ -43,7 +43,6 @@ abstract class AbstractConfig
         );
     }
 
-
     /**
      * @param      $key
      * @param null $default
@@ -52,7 +51,6 @@ abstract class AbstractConfig
      */
     public function get($key, $default = null)
     {
-        
         if ($this->has($key)) {
             return $this->data[$key];
         }
@@ -96,5 +94,4 @@ abstract class AbstractConfig
             $this->set($key, $value);
         }
     }
-
 }

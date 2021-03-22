@@ -8,7 +8,6 @@ use Exception;
  */
 class RestClient
 {
-
     /**
      *
      */

@@ -1,5 +1,7 @@
 <?php
-namespace MercadoPago;
+namespace MercadoPago\Entities\Shared;
+
+use MercadoPago\Entity;
 
 /**
  * Payment Method class

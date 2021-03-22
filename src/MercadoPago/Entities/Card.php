@@ -1,5 +1,7 @@
 <?php
-namespace MercadoPago;
+namespace MercadoPago\Entities;
+
+use MercadoPago\Entity;
 
 /**
  * The cards class is the way to store card data of your customers safely to improve the shopping experience.

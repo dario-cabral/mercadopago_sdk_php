@@ -1,13 +1,14 @@
 <?php
- 
-namespace MercadoPago;
+namespace MercadoPago\Generic;
 
-class RecuperableError {
-
+/**
+ * @package MercadoPago\Generic
+ */
+class RecuperableError
+{
     public $message = "";
     public $status = "";
     public $error = "";
-
     public $causes = [];
 
     function __construct($message, $error, $status) {
@@ -24,13 +25,15 @@ class RecuperableError {
     }
 
     public function proccess_causes($causes){
-        if(isset($causes['code']) && isset($causes['description'])){
+        if (isset($causes['code']) && isset($causes['description'])) {
             $this->add_cause($causes['code'], $causes['description']);
-        }else{
+            
+        } else {
             foreach ($causes as $cause){
-                if(is_array($cause) && (!isset($cause['code']) && !isset($cause['description']))){
+                if (is_array($cause) && (!isset($cause['code']) && !isset($cause['description']))) {
                     $this->proccess_causes($cause);
-                }else{
+                    
+                } else {
                     $this->add_cause($cause['code'], $cause['description']);
                 }
             }
@@ -41,7 +44,4 @@ class RecuperableError {
     {
         return $this->error . ": " . $this->message;
     }
-
 }
-
-?>
