@@ -44,6 +44,9 @@
             "MercadoPago\\Entities\\" : [
                 "src/MercadoPago/Entities/"
             ],
+            "MercadoPago\\Entities\\Shared\\" : [
+                "src/MercadoPago/Entities/Shared/"
+            ],
             "MercadoPago\\Generic\\" : [
                 "src/MercadoPago/Generic/"
             ]
