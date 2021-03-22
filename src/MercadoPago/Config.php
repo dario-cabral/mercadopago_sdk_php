@@ -76,9 +76,8 @@ class Config
     }
 
     /**
-     * @param $extension
-     *
      * Get Parser depending on extension
+     * @param $extension
      * @return null
      * @throws Exception
      */

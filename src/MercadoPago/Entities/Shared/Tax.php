@@ -1,10 +1,5 @@
 <?php
-/**
- * Tax class file
- */
 namespace MercadoPago;
-
-use MercadoPago\Annotation\Attribute;
 
 /**
  * Tax class

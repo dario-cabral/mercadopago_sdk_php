@@ -1,11 +1,5 @@
 <?php
-/**
- * Payer class file
- */
 namespace MercadoPago;
-
-use MercadoPago\Annotation\Attribute;
-use MercadoPago\Annotation\DenyDynamicAttribute;
 
 /**
  * Payer Class

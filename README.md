@@ -6,9 +6,11 @@
 
 This library provides developers with a simple set of bindings to help you integrate Mercado Pago API to a website and start receiving payments.
 
+Modified to work with Larabel 8.x
+
 ## 💡 Requirements
 
-PHP 5.6, 7.1 or higher
+PHP 7.3 or higher
 
 ## 📲 Installation 
 

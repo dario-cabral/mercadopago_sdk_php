@@ -1,12 +1,6 @@
 <?php
-/**
- * Disbursement Refund class file
- */
 namespace MercadoPago\AdvancedPayments;
 
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute;
 use MercadoPago\Entity;
 
 /**
@@ -14,8 +8,8 @@ use MercadoPago\Entity;
  * @RestMethod(resource="/v1/advanced_payments/:advanced_payment_id/disbursements/:disbursement_id/refunds", method="create")
  * @RestMethod(resource="/v1/advanced_payments/:advanced_payment_id/disbursements/:disbursement_id/refunds/:refund_id", method="read")
  */
-class DisbursementRefund extends Entity {
-
+class DisbursementRefund extends Entity
+{
     /**
      * id
      * @Attribute()

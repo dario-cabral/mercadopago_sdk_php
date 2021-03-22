@@ -1,16 +1,10 @@
 <?php
-/**
- * OAuth class file
- */
 namespace MercadoPago;
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\Attribute; 
 
 /**
  * OAuth class
  * @RestMethod(resource="/oauth/token", method="create")
  */
-
 class OAuth extends Entity
 {
    /**
@@ -97,7 +91,6 @@ class OAuth extends Entity
      */
     protected $scope;
 
-
     /**
      * getAuthorizationURL
      * @param $app_id
@@ -106,9 +99,9 @@ class OAuth extends Entity
      */
     public function getAuthorizationURL($app_id, $redirect_uri){
         $county_id = strtolower(SDK::getCountryId());
+        
         return "https://auth.mercadopago.com.${county_id}/authorization?client_id=${app_id}&response_type=code&platform_id=mp&redirect_uri=${redirect_uri}";
     }
-
 
     /**
      * getOAuthCredentials
@@ -118,14 +111,13 @@ class OAuth extends Entity
      * @throws \Exception
      */
     public function getOAuthCredentials($authorization_code, $redirect_uri){
-      $this->client_secret = SDK::getAccessToken();
-      $this->grant_type = 'authorization_code';
-      $this->code = $authorization_code;
-      $this->redirect_uri = $redirect_uri;
-
-      return $this->save();
+        $this->client_secret = SDK::getAccessToken();
+        $this->grant_type = 'authorization_code';
+        $this->code = $authorization_code;
+        $this->redirect_uri = $redirect_uri;
+        
+        return $this->save();
     }
-
 
     /**
      * refreshOAuthCredentials
@@ -134,10 +126,10 @@ class OAuth extends Entity
      * @throws \Exception
      */
     public function refreshOAuthCredentials($refresh_token){
-      $this->client_secret = SDK::getAccessToken();
-      $this->grant_type = 'refresh_token';
-      $this->refresh_token = $refresh_token;
-
-      return $this->save();
+        $this->client_secret = SDK::getAccessToken();
+        $this->grant_type = 'refresh_token';
+        $this->refresh_token = $refresh_token;
+        
+        return $this->save();
     }
 }

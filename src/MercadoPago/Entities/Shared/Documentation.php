@@ -1,11 +1,5 @@
 <?php
-/**
- * Documentation class file
- */
 namespace MercadoPago;
-
-use MercadoPago\Annotation\Attribute;
-use MercadoPago\Annotation\DenyDynamicAttribute;
 
 /**
  * Documentation class
@@ -32,5 +26,4 @@ class Documentation extends Entity
      * @var string
     */
     protected $description;
-
 }

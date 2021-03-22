@@ -1,10 +1,5 @@
 <?php
-/**
- * Track class file
- */
 namespace MercadoPago;
-
-use MercadoPago\Annotation\Attribute;
 
 /**
  * Track class

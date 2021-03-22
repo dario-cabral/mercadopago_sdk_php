@@ -1,20 +1,13 @@
 <?php
-/**
- * Refund class file
- */
 namespace MercadoPago;
-
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute;
 
 /**
  * refund class
  * @RestMethod(resource="/v1/payments/:payment_id/refunds", method="create")
  * @RestMethod(resource="/v1/payments/:payment_id/refunds/:id", method="read")
  */
-class Refund extends Entity {
-
+class Refund extends Entity
+{
     /**
      * id
      * @Attribute()
@@ -56,5 +49,4 @@ class Refund extends Entity {
      * @var \DateTime
      */
     protected $date_created;
-
 }

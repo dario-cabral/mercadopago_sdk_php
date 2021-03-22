@@ -1,17 +1,9 @@
 <?php
-/**
- * Chargeback class file
- * @link https://www.mercadopago.com/developers/en/reference/chargebacks/_chargebacks_id/get/ Click here for more infos
- */
 namespace MercadoPago;
-
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute;
-
 
 /**
  * Chargeback class
+ * @link https://www.mercadopago.com/developers/en/reference/chargebacks/_chargebacks_id/get/ Click here for more infos
  * @RestMethod(resource="/v1/chargebacks/:id", method="read")
  */
 class Chargeback extends Entity

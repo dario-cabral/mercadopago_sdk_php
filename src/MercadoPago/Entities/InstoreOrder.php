@@ -1,9 +1,5 @@
 <?php
 namespace MercadoPago;
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute; 
-
 
 /**
  * Instore Order class

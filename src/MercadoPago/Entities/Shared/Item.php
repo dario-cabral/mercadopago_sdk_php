@@ -1,11 +1,5 @@
 <?php
-/**
- * Item class file
- */
 namespace MercadoPago;
-
-use MercadoPago\Annotation\Attribute;
-use MercadoPago\Annotation\DenyDynamicAttribute;
 
 /**
  * Item class
@@ -67,5 +61,4 @@ class Item extends Entity
      * @var float
      */
     protected $unit_price;
-
 }

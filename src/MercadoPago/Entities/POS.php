@@ -1,9 +1,5 @@
 <?php
 namespace MercadoPago;
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute; 
-
 
 /**
  * POS class
@@ -107,5 +103,4 @@ class POS extends Entity
      * @var int
      */
     protected $user_id;
-
 }

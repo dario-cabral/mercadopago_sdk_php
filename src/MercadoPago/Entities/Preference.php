@@ -1,10 +1,6 @@
 <?php
 namespace MercadoPago;
 
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute;
-
 /**
  * This class will allow you to charge your customers through our web form from any device in a simple, fast and secure way.
  *  
@@ -218,5 +214,4 @@ class Preference extends Entity
      * @var array
      */
     protected $tracks;
-
 }

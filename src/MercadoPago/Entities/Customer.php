@@ -1,10 +1,6 @@
 <?php
 namespace MercadoPago;
 
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute;
-
 /**
  * This class allows you to store customers data safely to improve the shopping experience.
  *  
@@ -18,7 +14,6 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/v1/customers/:id", method="update")
  * @RestMethod(resource="/v1/customers/:id", method="delete")
  */
-
 class Customer extends Entity
 {
     /**

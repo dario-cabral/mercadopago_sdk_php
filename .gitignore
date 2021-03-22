@@ -20,3 +20,8 @@ nbproject
 /samples/vendor
 
 .env
+
+.settings
+.buildpath
+.editorconfig
+.project

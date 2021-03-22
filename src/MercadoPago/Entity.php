@@ -1,7 +1,8 @@
 <?php
 namespace MercadoPago;
-use MercadoPago\Annotation\Attribute;
+
 use Exception;
+
 /**
  * Class Entity
  *
@@ -12,19 +13,21 @@ abstract class Entity
     /**
      * @var
      */
-    
     protected static $_custom_headers = array();
     protected static $_manager;
+    
     /**
      * @Attribute(serialize = false)
      */
     protected $_last;
     protected $error;
     protected $_pagination_params;
+    
     /**
      * @Attribute(serialize = false)
      */
     protected $_empty = false;
+    
     /**
      * Entity constructor.
      *
@@ -37,6 +40,7 @@ abstract class Entity
         if (empty(self::$_manager)) {
             throw new \Exception('Please initialize SDK first');
         }
+        
         self::$_manager->setEntityMetaData($this);
         $this->_fillFromArray($this, $params);
     }
@@ -47,6 +51,7 @@ abstract class Entity
     {
         return $this->error;
     }
+    
     /**
      * @param Manager $manager
      */
@@ -54,12 +59,14 @@ abstract class Entity
     {
         self::$_manager = $manager;
     }
+    
     /**
      */
     public static function unSetManager()
     {
         self::$_manager = null;
     }
+    
     /**
      * @return mixed
      */
@@ -67,6 +74,7 @@ abstract class Entity
     {
       return self::read(array("id" => $id));
     }
+    
     /**
      * @return mixed
      */
@@ -74,19 +82,23 @@ abstract class Entity
     { 
       return self::read(array("id" => $id));
     }
+    
     public static function setCustomHeader($key, $value)
     {
       self::$_custom_headers[$key] = $value;
-    } 
+    }
+    
     public static function getCustomHeader($key)
     {
       return self::$_custom_headers[$key];
-    } 
+    }
+    
     public static function setCustomHeadersFromArray($array){
       foreach ($array as $key => $value){ 
         self::setCustomHeader($key, $value);
       } 
     }
+    
     public static function getCustomHeaders()
     {
       return self::$_custom_headers;
@@ -118,10 +130,13 @@ abstract class Entity
             $entity->_fillFromArray($entity, $response['body']);
             $entity->_last = clone $entity;
             return $entity;
+            
         } elseif (intval($response['code']) == 404) {
             return null;
+            
         } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
             throw new Exception ($response['body']['message']);
+            
         } else {
             throw new Exception ("Internal API Error");
         }
@@ -144,16 +159,20 @@ abstract class Entity
       
         if ($response['code'] == "200" || $response['code'] == "201") {
             $results = $response['body'];
+            
             foreach ($results as $result) {
                 $entity = new $class();
                 $entity->_fillFromArray($entity, $result); 
                 array_push($entities, $entity);
             }
+            
         } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
             throw new Exception ($response['error'] . " " . $response['message']);
+            
         } else {
             throw new Exception ("Internal API Error");
         }
+        
         return $entities; 
     }
 
@@ -170,25 +189,31 @@ abstract class Entity
         self::$_manager->setEntityUrl($entityToQuery, 'search');
         self::$_manager->cleanQueryParams($entityToQuery);
         self::$_manager->setQueryParams($entityToQuery, $filters);
-
         $response = self::$_manager->execute($entityToQuery, 'get');
+        
         if ($response['code'] == "200" || $response['code'] == "201") {
             $results = $response['body']['results'];
+            
             foreach ($results as $result) {
                 $entity = new $class();
                 $entity->_fillFromArray($entity, $result);
                 $searchResult->append($entity);
             }
+            
             $searchResult->setPaginateParams($response['body']['paging']);
             $searchResult->_filters = $filters;
+            
         } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
             $searchResult->process_error_body($response['body']);
             throw new Exception ($response['body']['message']);
+            
         } else {
             throw new Exception ("Internal API Error");
         }
+        
         return $searchResult;
     }
+    
     /**
      * @codeCoverageIgnore
      * @return mixed
@@ -214,14 +239,17 @@ abstract class Entity
             
             $this->_fillFromArray($this, $response['body']); 
             return true;
+            
         } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
             // A recuperable error 
             $this->process_error_body($response['body']); 
             return false;
+            
         } else {
             throw new Exception ("Internal API Error");
         }
     }
+    
     /**
      * @codeCoverageIgnore
      * @return mixed
@@ -239,9 +267,11 @@ abstract class Entity
       self::$_manager->setEntityUrl($this, $action);
       self::$_manager->setEntityQueryJsonData($this);
       $response = self::$_manager->execute($this, $method);
+      
       if ($response['code'] == "200" || $response['code'] == "201") {
           $this->_fillFromArray($this, $response['body']);
       }
+      
       return $response;
     }
 
@@ -259,10 +289,12 @@ abstract class Entity
             $this->_fillFromArray($this, $response['body']);
             $this->_last = clone $this;
             return true;
+            
         } elseif (intval($response['code']) >= 300 && intval($response['code']) < 500) {
             // A recuperable error
             $this->process_error_body($response['body']);
             return false;
+            
         } else {
             // Trigger an exception
             throw new Exception ("Internal API Error");
@@ -275,6 +307,7 @@ abstract class Entity
             $message['error'],
             $message['status']
         );
+        
         $recuperable_error->proccess_causes($message['cause']);
         $this->error = $recuperable_error;
     }
@@ -289,8 +322,6 @@ abstract class Entity
         return $this->{$name};
     }
 
-    
-
     /**
      * @param $name
      *
@@ -300,6 +331,7 @@ abstract class Entity
     {
         return isset($this->{$name});
     }
+    
     /**
      * @param $name
      * @param $value
@@ -312,6 +344,7 @@ abstract class Entity
         $this->_setValue($name, $value);
         return $this->{$name};
     }
+    
     /**
      * @param null $attributes
      *
@@ -320,6 +353,7 @@ abstract class Entity
     public function getAttributes() {
         return get_object_vars($this);
     }
+    
      /**
      * @param null $attributes
      *
@@ -328,11 +362,11 @@ abstract class Entity
     public function toArray($attributes = null)
     {
         $result = null;
-
         $excluded_attributes = self::$_manager->getExcludedAttributes($this);
 
         if (is_null($attributes)) {
             $result = get_object_vars($this);
+            
         } else {
             $result = array_intersect_key(get_object_vars($this), $attributes);
         }        
@@ -348,8 +382,8 @@ abstract class Entity
         }
 
         return $result;
-    
     }
+    
     /**
      * @param $property
      * @param $value
@@ -362,18 +396,23 @@ abstract class Entity
             if ($validate) {
                 self::$_manager->validateAttribute($this, $property, ['maxLength','readOnly'], $value);
             }
+            
             if ($this->_propertyTypeAllowed($property, $value)) {
                 $this->{$property} = $value;
+                
             } else {
                 $this->{$property} = $this->tryFormat($value, $this->_getPropertyType($property), $property);
             }
+            
         } else {
             if ($this->_getDynamicAttributeDenied()) {
                 throw new \Exception('Dynamic attribute: ' . $property . ' not allowed for entity ' . get_class($this));
             }
+            
             $this->{$property} = $value;
         }
     }
+    
     /**
      * @param $property
      *
@@ -383,6 +422,7 @@ abstract class Entity
     {
         return array_key_exists($property, get_object_vars($this));
     }
+    
     /**
      * @param $property
      * @param $type
@@ -392,14 +432,18 @@ abstract class Entity
     protected function _propertyTypeAllowed($property, $type)
     {
         $definedType = $this->_getPropertyType($property);
+        
         if (!$definedType) {
             return true;
         }
+        
         if (is_object($type) && class_exists($definedType, false)) {
             return ($type instanceof $definedType);
         }
+        
         return gettype($type) == $definedType;
     }
+    
     /**
      * @param $property
      *
@@ -409,6 +453,7 @@ abstract class Entity
     {
         return self::$_manager->getPropertyType(get_called_class(), $property);
     }
+    
     /**
      * @return mixed
      */
@@ -416,6 +461,7 @@ abstract class Entity
     {
         return self::$_manager->getDynamicAttributeDenied(get_called_class());
     }
+    
     /**
      * @param $value
      * @param $type
@@ -433,31 +479,39 @@ abstract class Entity
                         break;
                     }
                     return (float)$value;
+                    
                 case 'int':
                     if (!is_numeric($value)) {
                         break;
                     }
                     return (int)$value;
+                    
                 case 'string':
                     return (string)$value;
+                    
                 case 'array':
                     return (array)$value;
+                    
                 case 'date':
                     if (empty($value)) {
                         return $value;
                     };
+                    
                     if (is_string($value)) {
                         return date("Y-m-d\TH:i:s.000P", strtotime($value));
+                        
                     } else {
                         return $value->format('Y-m-d\TH:i:s.000P');
                     }
-                    
             }
+            
         } catch (\Exception $e) {
             throw new \Exception('Wrong type ' . gettype($value) . '. Cannot convert ' . $type . ' for property ' . $property);
         }
+        
         throw new \Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
     }
+    
     /**
      * Fill entity from data with nested object creation
      *
@@ -465,27 +519,30 @@ abstract class Entity
      * @param $data
      */
     protected function _fillFromArray($entity, $data)
-    { 
-      
-      if ($data) {
-        
-        foreach ($data as $key => $value) {
-            if (!is_null($value)){
-                if (is_array($value)) {
-                    $className = 'MercadoPago\\' . $this->_camelize($key);
-                    if (class_exists($className, true)) {
-                        $entity->_setValue($key, new $className, false);
-                        $entity->_fillFromArray($this->{$key}, $value);
-                    } else {
-                        $entity->_setValue($key, json_decode(json_encode($value)), false);
+    {
+        if ($data) {
+            foreach ($data as $key => $value) {
+                if (!is_null($value)){
+                    if (is_array($value)) {
+                        $className = 'MercadoPago\\' . $this->_camelize($key);
+                        
+                        if (class_exists($className, true)) {
+                            $entity->_setValue($key, new $className, false);
+                            $entity->_fillFromArray($this->{$key}, $value);
+                            
+                        } else {
+                            $entity->_setValue($key, json_decode(json_encode($value)), false);
+                        }
+                        
+                        continue;
                     }
-                    continue;
+                    
+                    $entity->_setValue($key, $value, false);
                 }
-                $entity->_setValue($key, $value, false);
             }
         }
-      }
     }
+    
     /**
      * @param        $input
      * @param string $separator
@@ -497,7 +554,6 @@ abstract class Entity
         return str_replace($separator, '', ucwords($input, $separator));
     }
 
-
     public function delete($options = [])
     {
         $params = [];
@@ -508,14 +564,16 @@ abstract class Entity
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
             return true;
+            
         } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
             if (!is_null($response['body'])){
                 $this->process_error_body($response['body']);
             }
+            
             return false;
+            
         } else {
             throw new Exception ("Internal API Error");
         }
     }
 }
-

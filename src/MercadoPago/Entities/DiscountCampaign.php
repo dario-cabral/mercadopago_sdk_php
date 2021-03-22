@@ -1,20 +1,10 @@
 <?php
-/**
- * Discount Campaign class file
- */
 namespace MercadoPago;
-
-use http\Params;
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute;
 
 /**
  * discount Campaign class
  * @RestMethod(resource="/v1/discount_campaigns", method="read")
  */
-
-
 class DiscountCampaign extends Entity
 {
     /**

@@ -32,7 +32,6 @@ class MetaDataReader
         $this->_reader = new AnnotationReader();
         
         return $this;
-
     }
 
     /**
@@ -44,15 +43,18 @@ class MetaDataReader
     {
         if (get_parent_class($entity)){
             $result = $this->getMetaData(get_parent_class($entity));
-        }else {
+            
+        } else {
             $result = new \stdClass;
         }
 
         $propertyAnnotations = [];
         $class = new \ReflectionClass($entity);
         $classAnnotations = $this->_reader->getClassAnnotations($class);
+        
         foreach ($class->getProperties() as $key => $value) {
             $annotation = $this->_reader->getPropertyAnnotations(new \ReflectionProperty($entity, $value->name));
+            
             if (count($annotation)) {
                 $propertyAnnotations[$value->name] = array_pop($annotation);
             }
@@ -62,9 +64,11 @@ class MetaDataReader
             if ($annotation instanceof \MercadoPago\Annotation\RestMethod) {
                 $result->methods[$annotation->method] = get_object_vars($annotation);
             }
+            
             if ($annotation instanceof \MercadoPago\Annotation\RequestParam) {
                 $result->params[] = $annotation->param;
             }
+            
             if ($annotation instanceof \MercadoPago\Annotation\DenyDynamicAttribute) {
                 $result->denyDynamicAttribute = true;
             }

@@ -1,10 +1,6 @@
 <?php
 namespace MercadoPago;
 
-use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute;
-
 /**
  * The cards class is the way to store card data of your customers safely to improve the shopping experience.
  *
