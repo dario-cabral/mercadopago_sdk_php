@@ -32,6 +32,7 @@ class SDK
         self::$_config = new Config(null, self::$_restClient);
         self::$_restClient->setHttpParam('address', self::$_config->get('base_url'));
         self::$_manager = new Manager(self::$_restClient, self::$_config);
+        
         Entity::setManager(self::$_manager);
     }
     
@@ -44,7 +45,6 @@ class SDK
       }
       
       self::$_config->configure(['ACCESS_TOKEN' => $access_token]);
-      
     }
 
     public static function getAccessToken(){
@@ -132,7 +132,9 @@ class SDK
         self::$_manager->addCustomTrackingParam($key, $value);
     }
     
-    // Publishing generic functions 
+    /**
+     * Publishing generic functions
+     */
     
     public static function get($uri, $options=[])
     {
