@@ -1,8 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
-use MercadoPago\SDK;
+namespace MercadoPago;
 
 /**
  * OAuth class

@@ -17,21 +17,21 @@ class Yaml implements ParserInterface
      * @return mixed
      * @throws Exception
      */
-    public function parse($path)
-    {
+    public function parse($path) {
         try {
             $data = YamlParser::parse(file_get_contents($path));
+            
         } catch (Exception $exception) {
             throw new Exception('Error parsing YAML file');
         }
+        
         return $data;
     }
 
     /**
      * @return array
      */
-    public function getSupportedExtensions()
-    {
+    public function getSupportedExtensions() {
         return array('yaml', 'yml');
     }
 }

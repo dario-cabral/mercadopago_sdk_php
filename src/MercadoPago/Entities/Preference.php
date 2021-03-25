@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * This class will allow you to charge your customers through our web form from any device in a simple, fast and secure way.

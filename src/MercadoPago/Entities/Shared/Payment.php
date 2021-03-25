@@ -1,8 +1,5 @@
 <?php
-namespace MercadoPago\Entities\Shared;
-
-use MercadoPago\Entity;
-use MercadoPago\Entities\Refund;
+namespace MercadoPago;
 
 /**
  * This class provides the methods to access the API that will allow you to create your own payment experience on your website.
@@ -557,14 +554,14 @@ class Payment extends Entity
      * @return bool
      * @throws \Exception
      */
-    public function refund($amount = 0){
+    public function refund($amount = 0) {
         $refund = new Refund(["payment_id" => $this->id]);
         
         if ($amount > 0){
             $refund->amount = $amount;
         }
 
-        if ($refund->save()){
+        if ($refund->save()) {
             $payment = self::get($this->id);
             $this->_fillFromArray($this, $payment->toArray());
             return true;
@@ -581,11 +578,10 @@ class Payment extends Entity
      * @return Payment
      * @throws \Exception
      */
-    public function capture($amount = 0)
-    {
+    public function capture($amount = 0) {
         $this->capture = true;
         
-        if ($amount > 0){
+        if ($amount > 0) {
             $this->transaction_amount = $amount;
         }
 

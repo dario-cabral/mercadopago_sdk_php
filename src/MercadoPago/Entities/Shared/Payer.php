@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities\Shared;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * Payer Class
@@ -91,5 +89,4 @@ class Payer extends Entity
      * @var object
      */
     protected $address;
-
 }

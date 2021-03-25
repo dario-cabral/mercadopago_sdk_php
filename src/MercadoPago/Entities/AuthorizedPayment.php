@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * Authorized Payments Class
@@ -11,7 +9,6 @@ use MercadoPago\Entity;
  * @RestMethod(resource="/authorized_payment/search", method="search")
  * @RestMethod(resource="/authorized_payment/:id", method="update")
  */
-
 class AuthorizedPayment extends Entity
 {
     /**
@@ -139,6 +136,4 @@ class AuthorizedPayment extends Entity
      * @var string
      */
     protected $coupon_code;
-
-
 }

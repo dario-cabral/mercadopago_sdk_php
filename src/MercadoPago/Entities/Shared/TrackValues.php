@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities\Shared;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * Track Values class

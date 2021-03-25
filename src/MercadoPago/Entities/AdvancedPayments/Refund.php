@@ -1,5 +1,5 @@
 <?php
-namespace MercadoPago\Entities\AdvancedPayments;
+namespace MercadoPago\AdvancedPayments;
 
 use MercadoPago\Entity;
 

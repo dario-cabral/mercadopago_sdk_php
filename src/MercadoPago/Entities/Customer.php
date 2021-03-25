@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * This class allows you to store customers data safely to improve the shopping experience.
@@ -136,5 +134,4 @@ class Customer extends Entity
      * @var boolean
      */
     protected $live_mode;
-
 }

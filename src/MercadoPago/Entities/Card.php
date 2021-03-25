@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * The cards class is the way to store card data of your customers safely to improve the shopping experience.
@@ -17,7 +15,6 @@ use MercadoPago\Entity;
  * @RestMethod(resource="/v1/customers/:customer_id/cards/:id", method="update")
  * @RestMethod(resource="/v1/customers/:customer_id/cards/:id", method="delete")
  */
-
 class Card extends Entity
 {
     /**
@@ -103,6 +100,4 @@ class Card extends Entity
      * @var string
      */
     protected $date_last_updated;
-
-
 }

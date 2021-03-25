@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * POS class
@@ -21,7 +19,7 @@ class POS extends Entity
      * @var string
      */
     protected $id;
-    
+
     /**
      * name
      * @Attribute()

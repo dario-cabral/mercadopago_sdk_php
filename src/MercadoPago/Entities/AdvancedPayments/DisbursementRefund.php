@@ -1,5 +1,5 @@
 <?php
-namespace MercadoPago\Entities\AdvancedPayments;
+namespace MercadoPago\AdvancedPayments;
 
 use MercadoPago\Entity;
 
@@ -65,5 +65,4 @@ class DisbursementRefund extends Entity
      * @var int
      */
     protected $disbursement_id;
-
 }

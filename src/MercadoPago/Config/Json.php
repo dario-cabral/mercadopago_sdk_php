@@ -16,8 +16,7 @@ class Json implements ParserInterface
      * @return mixed
      * @throws Exception
      */
-    public function parse($path)
-    {
+    public function parse($path) {
         $data = json_decode(file_get_contents($path), true);
         
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -36,8 +35,7 @@ class Json implements ParserInterface
     /**
      * @return array
      */
-    public function getSupportedExtensions()
-    {
+    public function getSupportedExtensions() {
         return array('json');
     }
 }

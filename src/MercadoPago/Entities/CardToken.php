@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * Card Token class
@@ -124,5 +122,4 @@ class CardToken extends Entity
      * @var string
      */
     protected $date_created;
-
 }

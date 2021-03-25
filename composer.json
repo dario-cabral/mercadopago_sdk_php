@@ -39,17 +39,11 @@
 		"psr-4" : {
 			"MercadoPago\\" : [
 				"src/MercadoPago/",
-				"tests/"
-			],
-            "MercadoPago\\Entities\\" : [
-                "src/MercadoPago/Entities/"
-            ],
-            "MercadoPago\\Entities\\Shared\\" : [
+                "tests/",
+                "src/MercadoPago/Generic/",
+                "src/MercadoPago/Entities/",
                 "src/MercadoPago/Entities/Shared/"
-            ],
-            "MercadoPago\\Generic\\" : [
-                "src/MercadoPago/Generic/"
-            ]
+			]
 		}
 	},
 	"scripts" : {

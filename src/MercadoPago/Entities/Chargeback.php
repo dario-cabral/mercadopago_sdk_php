@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * Chargeback class
@@ -93,5 +91,4 @@ class Chargeback extends Entity
      * @var boolean
      */
     protected $live_mode;
-
 }

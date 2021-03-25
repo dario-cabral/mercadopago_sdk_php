@@ -2,7 +2,7 @@
 namespace MercadoPago;
 
 use Exception;
- 
+
 /**
  * MercadoPago cURL RestClient
  */
@@ -22,7 +22,7 @@ class RestClient
      * @var Http\CurlRequest|null
      */
     protected $httpRequest = null;
-    
+
     /**
      * @var array
      */
@@ -32,8 +32,7 @@ class RestClient
     /**
      * RestClient constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->httpRequest = new Http\CurlRequest();
     }
 
@@ -41,27 +40,26 @@ class RestClient
      * @param Http\HttpRequest $connect
      * @param                  $headers
      */
-    protected function setHeaders(Http\HttpRequest $connect, $customHeaders)
-    {
+    protected function setHeaders(Http\HttpRequest $connect, $customHeaders) {
         $default_header = array(
             'Content-Type' => 'application/json',
             'User-Agent' => 'MercadoPago DX-PHP SDK/ v' . Version::$_VERSION,
             'x-product-id' => 'BC32A7RU643001OI3940',
             'x-tracking-id' => 'platform:' . PHP_MAJOR_VERSION .'|' . PHP_VERSION . ',type:SDK' . Version::$_VERSION . ',so;'
         );
-
+        
         if ($customHeaders) {
             $default_header = array_merge($default_header, $customHeaders);
         }
-
-        if (!isset($default_header['Authorization'])){
+        
+        if (!isset($default_header['Authorization'])) {
             $default_header['Authorization'] = 'Bearer '.SDK::getAccessToken();
         }
-
+        
         foreach ($default_header as $key => $value) {
             $headers[] = $key . ': ' . $value;
         }
-
+        
         $connect->setOption(CURLOPT_HTTPHEADER, $headers);
     }
 
@@ -72,17 +70,15 @@ class RestClient
      *
      * @throws Exception
      */
-    protected function setData(Http\HttpRequest $connect, $data, $content_type = '')
-    {
+    protected function setData(Http\HttpRequest $connect, $data, $content_type = '') {
         if ($content_type == "application/json") {
-                
             if (gettype($data) == "string") {
                 json_decode($data, true);
                 
             } else { 
                 $data = json_encode($data); 
             }
-
+            
             if (function_exists('json_last_error')) {
                 $json_error = json_last_error();
                 
@@ -90,7 +86,7 @@ class RestClient
                     throw new Exception("JSON Error [{$json_error}] - Data: {$data}");
                 }
             }
-        } 
+        }
         
         if ($data != "[]") {
             $connect->setOption(CURLOPT_POSTFIELDS, $data);
@@ -98,22 +94,19 @@ class RestClient
         } else {
             $connect->setOption(CURLOPT_POSTFIELDS, "");
         }
-        
     }
 
     /**
      * @param $request
      */
-    public function setHttpRequest($request)
-    {
+    public function setHttpRequest($request) {
         $this->httpRequest = $request;
     }
 
     /**
      * @return Http\CurlRequest|null
      */
-    public function getHttpRequest()
-    {
+    public function getHttpRequest() {
         return $this->httpRequest;
     }
 
@@ -123,8 +116,7 @@ class RestClient
      * @return array
      * @throws Exception
      */
-    protected function exec($options)
-    {  
+    protected function exec($options) {
         $method = key($options);
         $requestPath = reset($options);
         $verb = self::$verbArray[$method];
@@ -137,7 +129,7 @@ class RestClient
         $defaultHttpParams = self::$defaultParams;
         $connectionParams = array_merge($defaultHttpParams, $this->customParams);
         $query = '';
-
+        
         if ($url_query > 0) {
             $query = http_build_query($url_query);
         }
@@ -153,7 +145,7 @@ class RestClient
                 $uri .= '?' . $query;
             }
         }
-
+        
         $connect = $this->getHttpRequest();
         $connect->setOption(CURLOPT_URL, $uri);
         
@@ -190,7 +182,7 @@ class RestClient
         }
         
         $connect->setOption(CURLOPT_FOLLOWLOCATION, true);
-
+        
         if ($formData) {
             $this->setData($connect, $formData);
         }
@@ -198,7 +190,7 @@ class RestClient
         if ($jsonData) {
             $this->setData($connect, $jsonData, "application/json");
         }
- 
+        
         $apiResult = $connect->execute();
         $apiHttpCode = $connect->getInfo(CURLINFO_HTTP_CODE);
         
@@ -214,7 +206,7 @@ class RestClient
         
         $response['response'] = json_decode($apiResult, true);
         $response['code'] = $apiHttpCode;
-
+        
         $connect->error();
         
         return ['code' => $response['code'], 'body' => $response['response']];
@@ -227,8 +219,7 @@ class RestClient
      * @return array
      * @throws Exception
      */
-    public function get($uri, $options = [])
-    {
+    public function get($uri, $options = []) {
         return $this->exec(array_merge(['get' => $uri], $options));
     }
 
@@ -239,8 +230,7 @@ class RestClient
      * @return array
      * @throws Exception
      */
-    public function post($uri, $options = [])
-    {  
+    public function post($uri, $options = []) {
         return $this->exec(array_merge(['post' => $uri], $options));
     }
 
@@ -251,8 +241,7 @@ class RestClient
      * @return array
      * @throws Exception
      */
-    public function put($uri, $options = [])
-    {
+    public function put($uri, $options = []) {
         return $this->exec(array_merge(['put' => $uri], $options));
     }
 
@@ -263,8 +252,7 @@ class RestClient
      * @return array
      * @throws Exception
      */
-    public function delete($uri, $options = [])
-    {
+    public function delete($uri, $options = []) {
         return $this->exec(array_merge(['delete' => $uri], $options));
     }
 
@@ -272,8 +260,7 @@ class RestClient
      * @param $param
      * @param $value
      */
-    public function setHttpParam($param, $value)
-    {
+    public function setHttpParam($param, $value) {
         self::$defaultParams[$param] = $value;
     }
 
@@ -283,8 +270,7 @@ class RestClient
      *
      * @return bool
      */
-    protected function getArrayValue($array, $key)
-    {
+    protected function getArrayValue($array, $key) {
         if (array_key_exists($key, $array)) {
             return $array[$key];
             

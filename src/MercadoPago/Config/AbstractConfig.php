@@ -23,23 +23,20 @@ abstract class AbstractConfig
      *
      * @param array $data
      */
-    public function __construct(array $data)
-    {
+    public function __construct(array $data) {
         $this->data = array_merge($this->getDefaults(), $data);
     }
 
     /**
      * @return array
      */
-    protected function getDefaults()
-    {
+    protected function getDefaults() {
         return [];
     }
 
-    public function clean()
-    {
+    public function clean() {
         return $this->data = array(
-            'base_url'      => 'https://api.mercadopago.com',
+            'base_url' => 'https://api.mercadopago.com',
         );
     }
 
@@ -49,8 +46,7 @@ abstract class AbstractConfig
      *
      * @return mixed|null
      */
-    public function get($key, $default = null)
-    {
+    public function get($key, $default = null) {
         if ($this->has($key)) {
             return $this->data[$key];
         }
@@ -62,8 +58,7 @@ abstract class AbstractConfig
      * @param $key
      * @param $value
      */
-    public function set($key, $value)
-    {
+    public function set($key, $value) {
         $this->data[$key] = $value;
     }
 
@@ -72,24 +67,21 @@ abstract class AbstractConfig
      *
      * @return bool
      */
-    public function has($key)
-    {
+    public function has($key) {
         return (array_key_exists($key, $this->data));
     }
 
     /**
      * @return array|null
      */
-    public function all()
-    {
+    public function all() {
         return $this->data;
     }
 
     /**
      * @param array $data
      */
-    public function configure ($data = [])
-    {
+    public function configure ($data = []) {
         foreach ($data as $key => $value) {
             $this->set($key, $value);
         }

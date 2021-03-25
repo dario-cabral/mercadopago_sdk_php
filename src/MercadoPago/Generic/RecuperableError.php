@@ -1,5 +1,5 @@
 <?php
-namespace MercadoPago\Generic;
+namespace MercadoPago;
 
 /**
  * @package MercadoPago\Generic
@@ -40,8 +40,7 @@ class RecuperableError
         }
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         return $this->error . ": " . $this->message;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace MercadoPago\Generic;
+namespace MercadoPago;
 
 use ArrayObject;
 
@@ -15,20 +15,17 @@ class SearchResultsArray extends ArrayObject
     public $errors;
     public $_class;
     
-    public function setEntityTypes($class)
-    {
+    public function setEntityTypes($class) {
         $this->_class = $class;
     }
 
-    public function setPaginateParams($params)
-    { 
+    public function setPaginateParams($params) { 
         $this->limit  = $params["limit"];
         $this->total  = $params["total"];
         $this->offset = $params["offset"]; 
     }
 
-    public function next()
-    {
+    public function next() {
         $new_offset = $this->limit + $this->offset;
         echo "\n new offset" . $new_offset;
 
@@ -45,8 +42,7 @@ class SearchResultsArray extends ArrayObject
         $this->exchangeArray($result->getArrayCopy());
     }
 
-    public function process_error_body($message)
-    {
+    public function process_error_body($message) {
         $recuperable_error = new RecuperableError(
             $message['message'],
             $message['error'],

@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * discount Campaign class
@@ -50,7 +48,6 @@ class DiscountCampaign extends Entity
      * @var string
      */
     protected $currency_id;
-
 
     /**
      * read

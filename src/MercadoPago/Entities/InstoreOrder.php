@@ -1,7 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
-
-use MercadoPago\Entity;
+namespace MercadoPago;
 
 /**
  * Instore Order class
@@ -38,5 +36,4 @@ class InstoreOrder extends Entity
      * @var array
      */
     protected $items;
-
 }
